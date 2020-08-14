@@ -1,0 +1,47 @@
+{
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "balances": [{
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "currency_code": "BTC",
+    "change": "0.2",
+    "available": "8975.828764802",
+    "locked": "0.4",
+    "sequence": 95580252,
+    "time": "2020-06-02T15:17:56.819Z"
+  }, {
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "currency_code": "USDT",
+    "change": "4965.79185339",
+    "available": "11075.75204335",
+    "locked": "0.0",
+    "sequence": 1936,
+    "time": "2019-12-17T14:20:29.409Z"
+  }, {
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "currency_code": "BEST",
+    "change": "0.04691459",
+    "available": "0.00659551",
+    "locked": "0.0",
+    "sequence": 3903,
+    "time": "2020-03-06T10:31:08.417Z"
+  }, {
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "currency_code": "EUR",
+    "change": "1813.06512",
+    "available": "6606076.62363137",
+    "locked": "0.0",
+    "sequence": 95501978,
+    "time": "2020-06-02T12:40:47.548Z"
+  }, {
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "currency_code": "ETH",
+    "change": "22.1245533",
+    "available": "1179.6832132",
+    "locked": "0.0",
+    "sequence": 58600618,
+    "time": "2020-07-07T10:36:48.675Z"
+  }],
+  "channel_name": "ACCOUNT_HISTORY",
+  "type": "BALANCES_SNAPSHOT",
+  "time": "2020-06-02T15:34:32.239Z"
+}

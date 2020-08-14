@@ -1,0 +1,10 @@
+{
+  "status": "CANCELLED",
+  "order_book_sequence": 241603714,
+  "instrument_code": "BTC_EUR",
+  "order_id": "65ecb524-4a7f-4b22-aa44-ec0b38d3db9c",
+  "remaining": "0.0",
+  "channel_name": "TRADING",
+  "type": "DONE",
+  "time": "2020-06-02T19:45:06.891Z"
+}

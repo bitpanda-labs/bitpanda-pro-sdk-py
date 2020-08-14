@@ -1,0 +1,38 @@
+import asyncio
+import json
+import logging
+
+from bpprosdk.websockets.subscriptions import Subscriptions, TradingSubscription
+from bpprosdk.websockets.websocket_client import BitpandaProWebsocketClient
+
+
+async def main():
+    when_msg_received = asyncio.get_event_loop().create_future()
+
+    def handle_message(event: json):
+        LOG.info("%s", event)
+        # ... add custom code here
+        if when_msg_received.done() is False:
+            when_msg_received.set_result("Received a message...")
+
+    # add your api token
+    my_api_token = "ey..."
+
+    bp_client = BitpandaProWebsocketClient(
+        api_token=my_api_token,
+        wss_host="wss://streams.exchange.bitpanda.com",
+        callback=handle_message
+    )
+
+    trading_subscription = TradingSubscription()
+    await bp_client.start(Subscriptions([trading_subscription]))
+    # ...
+    await when_msg_received
+    # ...
+    await bp_client.close()
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s\t%(levelname)-5s\t%(name)s\t%(message)s")
+    LOG = logging.getLogger(__name__)
+
+    asyncio.run(main())

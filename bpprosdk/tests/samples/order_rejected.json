@@ -1,0 +1,16 @@
+{
+  "id": "d3fe6025-5b27-4df6-a957-98b8d131cb9d",
+  "type": "ORDER_REJECTED",
+  "activity": "TRADING",
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "sequence": 0,
+  "timestamp": "2018-08-01T13:39:15.590Z",
+  "reason": "INSUFFICIENT_FUNDS",
+  "order_id": "6f991342-da2c-45c6-8830-8bf519cfc8cc",
+  "unlocked": {
+    "currency_code": "BTC",
+    "amount": "1.5",
+    "new_locked": "2.0"
+  },
+  "channel_name": "ACCOUNT_HISTORY"
+}

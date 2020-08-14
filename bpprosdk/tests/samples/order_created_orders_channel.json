@@ -1,0 +1,18 @@
+{
+  "order": {
+    "time_in_force": "GOOD_TILL_CANCELLED",
+    "is_post_only": false,
+    "order_id": "65ecb524-4a7f-4b22-aa44-ec0b38d3db9c",
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "instrument_code": "BTC_EUR",
+    "time": "2020-06-02T15:56:51.573Z",
+    "side": "SELL",
+    "price": "8500.0",
+    "amount": "1.0",
+    "filled_amount": "0.0",
+    "type": "LIMIT"
+  },
+  "channel_name": "ORDERS",
+  "type": "ORDER_CREATED",
+  "time": "2020-06-02T15:56:51.589Z"
+}

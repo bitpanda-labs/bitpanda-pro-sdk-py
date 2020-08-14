@@ -1,0 +1,58 @@
+{
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "sequence": 95698141,
+  "update": {
+    "type": "TRADE_SETTLED",
+    "activity": "TRADING",
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "time": "2020-06-02T19:45:06.891Z",
+    "order_id": "65ecb524-4a7f-4b22-aa44-ec0b38d3db9c",
+    "filled_amount": "0.5",
+    "order": {
+      "amount": "1.0",
+      "filled_amount": "0.5"
+    },
+    "trade": {
+      "trade_id": "1134362d-5143-4742-978e-2ed94d23a7c0",
+      "order_id": "65ecb524-4a7f-4b22-aa44-ec0b38d3db9c",
+      "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+      "amount": "0.5",
+      "side": "SELL",
+      "instrument_code": "BTC_EUR",
+      "price": "8597.0",
+      "time": "2020-06-02T19:45:06.806Z"
+    },
+    "fee": {
+      "fee_amount": "1.7194",
+      "fee_currency": "EUR",
+      "fee_percentage": "0.1",
+      "fee_group_id": "default",
+      "fee_type": "TAKER",
+      "running_trading_volume": "0.0",
+      "collection_type": "STANDARD"
+    },
+    "spent": {
+      "currency_code": "BTC",
+      "amount": "0.5",
+      "new_available": "8974.828764802",
+      "new_locked": "0.9"
+    },
+    "credited": {
+      "currency_code": "EUR",
+      "amount": "877.6806",
+      "new_available": "6607094.30423137",
+      "new_locked": "0.0"
+    },
+    "unlocked": {
+      "currency_code": "BTC",
+      "amount": "0.5",
+      "new_available": "8974.828764802",
+      "new_locked": "0.9"
+    },
+    "id": "04bddb50-b030-4f09-bf9e-4433e0040bf2",
+    "sequence": 95698141
+  },
+  "channel_name": "ACCOUNT_HISTORY",
+  "type": "ACCOUNT_UPDATE",
+  "time": "2020-06-02T19:45:06.899Z"
+}

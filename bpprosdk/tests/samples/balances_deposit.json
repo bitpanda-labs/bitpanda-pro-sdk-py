@@ -1,0 +1,28 @@
+{
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "sequence": 221200687,
+  "update": {
+    "activity": "FUNDING",
+    "type": "FUNDS_DEPOSITED",
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "time": "2020-08-12T16:42:01.091Z",
+    "credited": {
+      "currency_code": "BTC",
+      "amount": "1.11",
+      "new_available": "8976.938764802",
+      "new_locked": "0.5"
+    },
+    "transaction": {
+      "transaction_id": "5f3d2770-b737-426c-a013-9d48769b966c",
+      "transaction_id_prefix": "C",
+      "is_internal": true,
+      "fee_amount": "0.0",
+      "fee_currency": "BTC"
+    },
+    "id": "6d17b437-6747-42c4-9aca-670b63bf5190",
+    "sequence": 221200687
+  },
+  "channel_name": "ACCOUNT_HISTORY",
+  "type": "ACCOUNT_UPDATE",
+  "time": "2020-06-02T16:42:01.102Z"
+}

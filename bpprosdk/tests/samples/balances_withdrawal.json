@@ -1,0 +1,28 @@
+{
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "sequence": 221200944,
+  "update": {
+    "activity": "FUNDING",
+    "type": "FUNDS_WITHDRAWN",
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "time": "2020-08-12T16:42:21.045Z",
+    "deducted": {
+      "currency_code": "BTC",
+      "amount": "0.22",
+      "new_available": "8975.608764802",
+      "new_locked": "0.12"
+    },
+    "transaction": {
+      "transaction_id": "56945400-e2b1-42a7-b199-e65600f7af7d",
+      "transaction_id_prefix": "C",
+      "is_internal": true,
+      "fee_amount": "0.0",
+      "fee_currency": "BTC"
+    },
+    "id": "a806a102-ebff-4f41-9441-c297f166f875",
+    "sequence": 221200944
+  },
+  "channel_name": "ACCOUNT_HISTORY",
+  "type": "ACCOUNT_UPDATE",
+  "time": "2020-06-02T16:42:21.074Z"
+}

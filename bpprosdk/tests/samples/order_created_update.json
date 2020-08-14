@@ -1,0 +1,35 @@
+{
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "sequence": 95598744,
+  "update": {
+    "type": "ORDER_CREATED",
+    "activity": "TRADING",
+    "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+    "order_id": "65ecb524-4a7f-4b22-aa44-ec0b38d3db9c",
+    "time": "2020-06-02T15:56:51.579Z",
+    "order": {
+      "time_in_force": "GOOD_TILL_CANCELLED",
+      "is_post_only": false,
+      "order_id": "65ecb524-4a7f-4b22-aa44-ec0b38d3db9c",
+      "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+      "instrument_code": "BTC_EUR",
+      "time": "2020-06-02T15:56:51.573Z",
+      "side": "SELL",
+      "price": "8500.0",
+      "amount": "1.0",
+      "filled_amount": "0.0",
+      "type": "LIMIT"
+    },
+    "locked": {
+      "currency_code": "BTC",
+      "amount": "1.0",
+      "new_available": "8974.828764802",
+      "new_locked": "1.4"
+    },
+    "id": "3bb59be3-6506-4cc7-a421-066ffe43ca77",
+    "sequence": 95598744
+  },
+  "channel_name": "ACCOUNT_HISTORY",
+  "type": "ACCOUNT_UPDATE",
+  "time": "2020-06-02T15:56:51.589Z"
+}

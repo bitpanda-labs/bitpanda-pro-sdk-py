@@ -1,0 +1,25 @@
+{
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "orders": [{
+    "order": {
+      "time_in_force": "GOOD_TILL_CANCELLED",
+      "is_post_only": false,
+      "order_id": "6894fe05-4071-49ca-813e-d88d3621e168",
+      "client_id": "082e0b7c-1888-4db2-b53e-208b64ae09b3",
+      "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+      "instrument_code": "BTC_EUR",
+      "time": "2020-06-02T15:41:58.592Z",
+      "side": "SELL",
+      "price": "18500.0",
+      "amount": "0.2",
+      "filled_amount": "0.1",
+      "type": "LIMIT",
+      "sequence": 95591649,
+      "status": "OPEN"
+    },
+    "trades": []
+  }],
+  "channel_name": "ACCOUNT_HISTORY",
+  "type": "ACTIVE_ORDERS_SNAPSHOT",
+  "time": "2020-06-02T15:42:08.277Z"
+}

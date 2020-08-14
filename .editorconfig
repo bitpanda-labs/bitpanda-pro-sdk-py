@@ -1,0 +1,26 @@
+# http://editorconfig.org
+root = true
+
+[*]
+# force unix endings and utf-8 everywhere
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+
+[Makefile]
+# tabs are syntax elements in make
+indent_style = tab
+
+[*.py]
+# PEP 8 mandates multiples of four as indentation
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+[*.{bat,ps1,psm1,psd1,ps1xml}]
+end_of_line = crlf

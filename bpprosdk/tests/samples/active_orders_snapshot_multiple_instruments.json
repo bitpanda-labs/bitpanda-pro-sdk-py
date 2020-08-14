@@ -1,0 +1,58 @@
+{
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "orders": [{
+    "order": {
+      "time_in_force": "GOOD_TILL_CANCELLED",
+      "is_post_only": false,
+      "order_id": "94cd6c5a-5ab8-4678-b932-7f81083d1f08",
+      "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+      "instrument_code": "ETH_EUR",
+      "time": "2020-06-05T12:13:01.027Z",
+      "side": "SELL",
+      "price": "2400.0",
+      "amount": "22.0",
+      "filled_amount": "0.0",
+      "type": "LIMIT",
+      "sequence": 99266929,
+      "status": "OPEN"
+    },
+    "trades": []
+  }, {
+    "order": {
+      "time_in_force": "GOOD_TILL_CANCELLED",
+      "is_post_only": false,
+      "order_id": "ce246752-18c9-41a1-872e-759a0016b9c3",
+      "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+      "instrument_code": "BTC_EUR",
+      "time": "2020-06-05T12:12:45.501Z",
+      "side": "SELL",
+      "price": "18400.0",
+      "amount": "1.0",
+      "filled_amount": "0.0",
+      "type": "LIMIT",
+      "sequence": 99266733,
+      "status": "OPEN"
+    },
+    "trades": []
+  }, {
+    "order": {
+      "time_in_force": "GOOD_TILL_CANCELLED",
+      "is_post_only": false,
+      "order_id": "00d35426-08ed-4c53-9cf5-beaae6df2031",
+      "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+      "instrument_code": "BTC_EUR",
+      "time": "2020-06-05T09:48:01.324Z",
+      "side": "SELL",
+      "price": "18000.0",
+      "amount": "1.0",
+      "filled_amount": "0.0",
+      "type": "LIMIT",
+      "sequence": 99129018,
+      "status": "OPEN"
+    },
+    "trades": []
+  }],
+  "channel_name": "ACCOUNT_HISTORY",
+  "type": "ACTIVE_ORDERS_SNAPSHOT",
+  "time": "2020-06-05T12:13:18.431Z"
+}

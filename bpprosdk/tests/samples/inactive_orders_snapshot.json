@@ -1,0 +1,203 @@
+{
+  "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+  "orders": [
+    {
+      "order": {
+        "order_id": "c02b49a0-312b-42e4-803b-5ff2179c3d5f",
+        "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+        "time_last_updated": "2020-08-14T14:22:03.225Z",
+        "sequence": 223812644,
+        "price": "359.78",
+        "filled_amount": "1.0",
+        "amount": "1.0",
+        "status": "FILLED_FULLY",
+        "average_price": "359.78",
+        "time_triggered": "2020-08-14T14:22:03.146Z",
+        "instrument_code": "ETH_EUR",
+        "side": "BUY",
+        "time": "2020-08-14T14:21:53.665Z",
+        "type": "STOP",
+        "trigger_price": "359.71",
+        "time_in_force": "GOOD_TILL_CANCELLED",
+        "is_post_only": false
+      },
+      "trades": [
+        {
+          "fee": {
+            "fee_amount": "0.01",
+            "fee_currency": "ETH",
+            "fee_percentage": "1.0",
+            "fee_group_id": "tc-high-fees",
+            "fee_type": "TAKER",
+            "running_trading_volume": "1.05",
+            "collection_type": "STANDARD"
+          },
+          "trade": {
+            "trade_id": "adf23ce9-b1bc-4bd0-b4ac-4e7782832fa9",
+            "order_id": "c02b49a0-312b-42e4-803b-5ff2179c3d5f",
+            "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+            "amount": "1.0",
+            "side": "BUY",
+            "instrument_code": "ETH_EUR",
+            "price": "359.78",
+            "time": "2020-08-14T14:22:03.051Z",
+            "sequence": 223812644
+          }
+        }
+      ]
+    },
+    {
+      "order": {
+        "order_id": "1668a6d3-6519-4d38-b2cf-13a0a8e09a26",
+        "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+        "time_last_updated": "2020-08-14T14:22:03.188Z",
+        "sequence": 223812641,
+        "price": "359.66",
+        "filled_amount": "1.0",
+        "amount": "1.0",
+        "status": "FILLED_FULLY",
+        "average_price": "359.66576",
+        "instrument_code": "ETH_EUR",
+        "side": "SELL",
+        "time": "2020-08-14T14:22:03.033Z",
+        "type": "MARKET",
+        "is_post_only": false
+      },
+      "trades": [
+        {
+          "fee": {
+            "fee_amount": "0.517968",
+            "fee_currency": "EUR",
+            "fee_percentage": "1.0",
+            "fee_group_id": "tc-high-fees",
+            "fee_type": "TAKER",
+            "running_trading_volume": "1.05",
+            "collection_type": "STANDARD"
+          },
+          "trade": {
+            "trade_id": "fc0e76e1-0946-4907-b0a0-e24b8b8a48be",
+            "order_id": "1668a6d3-6519-4d38-b2cf-13a0a8e09a26",
+            "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+            "amount": "0.144",
+            "side": "SELL",
+            "instrument_code": "ETH_EUR",
+            "price": "359.7",
+            "time": "2020-08-14T14:22:03.051Z",
+            "sequence": 223812640
+          }
+        },
+        {
+          "fee": {
+            "fee_amount": "3.0786896",
+            "fee_currency": "EUR",
+            "fee_percentage": "1.0",
+            "fee_group_id": "tc-high-fees",
+            "fee_type": "TAKER",
+            "running_trading_volume": "1.05",
+            "collection_type": "STANDARD"
+          },
+          "trade": {
+            "trade_id": "e1c2c8c1-ba83-4b1b-b4c7-83337d1ed2e6",
+            "order_id": "1668a6d3-6519-4d38-b2cf-13a0a8e09a26",
+            "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+            "amount": "0.856",
+            "side": "SELL",
+            "instrument_code": "ETH_EUR",
+            "price": "359.66",
+            "time": "2020-08-14T14:22:03.051Z",
+            "sequence": 223812641
+          }
+        }
+      ]
+    },
+    {
+      "order": {
+        "time_in_force": "GOOD_TILL_CANCELLED",
+        "is_post_only": false,
+        "order_id": "297bd6d8-ae68-4547-b414-0bfc87d13019",
+        "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+        "instrument_code": "BTC_EUR",
+        "time": "2020-08-14T12:40:47.404Z",
+        "side": "SELL",
+        "price": "8500.0",
+        "amount": "0.2",
+        "filled_amount": "0.2",
+        "type": "LIMIT",
+        "sequence": 95501978,
+        "status": "FILLED_FULLY",
+        "time_last_updated": "2020-08-14T12:40:47.548Z",
+        "average_price": "9074.4"
+      },
+      "trades": [
+        {
+          "fee": {
+            "fee_amount": "1.81488",
+            "fee_currency": "EUR",
+            "fee_percentage": "0.1",
+            "fee_group_id": "default",
+            "fee_type": "TAKER",
+            "running_trading_volume": "0.2",
+            "collection_type": "STANDARD"
+          },
+          "trade": {
+            "trade_id": "4e1fa459-c582-4228-86a6-e48b17b00299",
+            "order_id": "297bd6d8-ae68-4547-b414-0bfc87d13019",
+            "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+            "amount": "0.2",
+            "side": "SELL",
+            "instrument_code": "BTC_EUR",
+            "price": "9074.4",
+            "time": "2020-08-14T12:40:47.439Z",
+            "sequence": 95501978
+          }
+        }
+      ]
+    },
+    {
+      "order": {
+        "time_in_force": "GOOD_TILL_CANCELLED",
+        "is_post_only": false,
+        "order_id": "0a475b23-e242-4868-92f9-299b4ef13259",
+        "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+        "instrument_code": "BTC_EUR",
+        "time": "2020-08-14T12:38:54.432Z",
+        "side": "SELL",
+        "price": "8550.0",
+        "amount": "0.2",
+        "filled_amount": "0.2",
+        "type": "LIMIT",
+        "sequence": 95501083,
+        "status": "FILLED_FULLY",
+        "time_last_updated": "2020-08-14T12:38:54.584Z",
+        "average_price": "9073.2"
+      },
+      "trades": [
+        {
+          "fee": {
+            "fee_amount": "1.81464",
+            "fee_currency": "EUR",
+            "fee_percentage": "0.1",
+            "fee_group_id": "default",
+            "fee_type": "TAKER",
+            "running_trading_volume": "0.2",
+            "collection_type": "STANDARD"
+          },
+          "trade": {
+            "trade_id": "5de102c8-2a7c-4e6d-8bf9-7787c46c42cc",
+            "order_id": "0a475b23-e242-4868-92f9-299b4ef13259",
+            "account_id": "ef3a5f4c-cfcd-415e-ba89-5a9abf47b28a",
+            "amount": "0.2",
+            "side": "SELL",
+            "instrument_code": "BTC_EUR",
+            "price": "9073.2",
+            "time": "2020-08-14T12:38:54.467Z",
+            "sequence": 95501083
+          }
+        }
+      ]
+    }
+  ],
+  "channel_name": "ACCOUNT_HISTORY",
+  "type": "INACTIVE_ORDERS_SNAPSHOT",
+  "time": "2020-08-14T15:42:08.319Z"
+}

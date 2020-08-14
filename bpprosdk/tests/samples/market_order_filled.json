@@ -1,0 +1,16 @@
+{
+  "id": "02f75d06-f217-45b3-b38a-b4cefd2e8b47",
+  "type": "MARKET_ORDER_FILLED",
+  "activity": "TRADING",
+  "account_id": "4a6b015e-dddf-472d-a7d0-42662eeab4d9",
+  "order_id": "da179847-89ba-4f50-944b-7f4f534f1a29",
+  "filled_amount": "2.0",
+  "unlocked": {
+    "currency_code": "BTC",
+    "amount": "2.0",
+    "new_available": "200.0",
+    "new_locked": "0.0"
+  },
+  "time": "2020-06-10T14:03:51.013Z",
+  "sequence": 12345
+}
