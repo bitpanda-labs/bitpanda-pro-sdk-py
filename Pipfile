@@ -15,7 +15,6 @@ pytest-asyncio = "*"
 [packages]
 websockets = "==8.1"
 dataclasses-json = "==0.4.5"
-pylint = "==2.5.2"
 
 [requires]
 python_version = "3.8"
