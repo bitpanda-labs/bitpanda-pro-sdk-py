@@ -60,3 +60,8 @@ Run Linter
 ```sh
 pylint --rcfile=.pylintrc --output-format=parseable --reports=n bpprosdk
 ```
+
+## Release
+
+1. Bump the package version in `setup.py`.
+1. Push a tag for the version to trigger the release action on github.
