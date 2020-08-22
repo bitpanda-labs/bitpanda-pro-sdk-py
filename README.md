@@ -1,5 +1,7 @@
 # Bitpanda Pro SDK
 
+![release](https://github.com/bitpanda-labs/bitpanda-pro-sdk-py/workflows/bp-pro-sdk-release/badge.svg)
+
 The [Bitpanda Pro](https://www.bitpanda.com/en/pro) SDK is a python reference implementation to easily interact with the web socket api.
 
 ## Development Status
