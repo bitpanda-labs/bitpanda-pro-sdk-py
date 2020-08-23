@@ -42,7 +42,7 @@ jobs:
           pipenv run pylint --rcfile=.pylintrc --output-format=parseable --reports=n bpprosdk
       - name: test
         run: |
-          pipenv run pytest --log-cli-level DEBUG
+          pipenv run pytest
         env:
           TEST_HOST: ${{ secrets.test_api_endpoint }}
           BP_PRO_API_TOKEN: ${{ secrets.test_api_token }}
