@@ -29,8 +29,10 @@ Essentially the SDK consists of the `BitpandaProWebsocketClient` and the `Advanc
   * order book state management via advanced client
 
 ## Quickstart
-All usage examples can be found in `bpprosdk/examples/websockets`.
 
+Releases are available on [pypi](https://pypi.org/project/bitpanda-pro-sdk/).
+
+All usage examples can be found in `bpprosdk/examples/websockets`.
 Examples with the advanced client have the prefix `advanced_`
 
 ## Documentation
