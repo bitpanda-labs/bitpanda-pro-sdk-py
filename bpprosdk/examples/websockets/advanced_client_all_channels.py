@@ -15,7 +15,7 @@ async def main():
     when_order_cancelled = asyncio.get_event_loop().create_future()
     when_order_book_snapshot_received = asyncio.get_event_loop().create_future()
 
-    def handle_message(event: json):
+    async def handle_message(event: json):
         LOG.info("%s", event)
         if event["type"] == "ORDER_BOOK_SNAPSHOT":
             when_order_book_snapshot_received.set_result("snapshot received...")

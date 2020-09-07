@@ -9,7 +9,7 @@ from bpprosdk.websockets.websocket_client import BitpandaProWebsocketClient
 async def main():
     when_msg_received = asyncio.get_event_loop().create_future()
 
-    def handle_message(event: json):
+    async def handle_message(event: json):
         LOG.info("%s", event)
         # ... add custom code here
         if when_msg_received.done() is False:

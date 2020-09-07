@@ -9,7 +9,7 @@ from bpprosdk.websockets.websocket_client_advanced import AdvancedBitpandaProWeb
 async def main():
     when_msg_received = asyncio.get_event_loop().create_future()
 
-    def handle_message(event: json):
+    async def handle_message(event: json):
         LOG.info("%s", event)
         if event["type"] == "ORDER_BOOK_SNAPSHOT":
             when_msg_received.set_result("snapshot received...")

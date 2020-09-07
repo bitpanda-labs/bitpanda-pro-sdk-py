@@ -68,7 +68,7 @@ async def test_verify_successful_account_history_subscription(event_loop):
     when_subscribed = event_loop.create_future()
     when_unsubscribed = event_loop.create_future()
 
-    def handle_message(json_message):
+    async def handle_message(json_message):
         if json_message["type"] == "SUBSCRIPTIONS":
             when_subscribed.set_result("subscribed")
         elif json_message["type"] == "UNSUBSCRIBED":
@@ -85,7 +85,7 @@ async def test_verify_successful_account_history_subscription(event_loop):
     await client.close()
 
 
-def log_messages(json_message):
+async def log_messages(json_message):
     """Callback only logging messages"""
     LOG.debug("message: %s", json_message)
 
@@ -93,7 +93,7 @@ def log_messages(json_message):
 async def test_handle_account_balances():
     """Test account balance snapshot handling"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(account_balances_json)
+    await client.handle_message(account_balances_json)
     balance = client.state.balances["EUR"]
     assert balance.available == Decimal("6606076.62363137")
 
@@ -101,7 +101,7 @@ async def test_handle_account_balances():
 async def test_handle_active_orders_snapshot():
     """Test active orders snapshot handling"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(active_orders_snapshot_json)
+    await client.handle_message(active_orders_snapshot_json)
     open_orders = client.state.open_orders_by_order_id
     assert len(open_orders) == 1, "expected 1 order"
     order = open_orders.get("6894fe05-4071-49ca-813e-d88d3621e168")
@@ -118,7 +118,7 @@ async def test_handle_active_orders_snapshot():
 async def test_handle_active_orders_snapshot_multiple_instruments():
     """Test active orders snapshot handling"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(active_orders_snapshot_multiple_instruments_json)
+    await client.handle_message(active_orders_snapshot_multiple_instruments_json)
     open_orders = client.state.open_orders_by_order_id
     assert len(open_orders) == 3
     btc_eur_order = open_orders.get("ce246752-18c9-41a1-872e-759a0016b9c3")
@@ -130,7 +130,7 @@ async def test_handle_active_orders_snapshot_multiple_instruments():
 async def test_handle_inactive_orders_snapshot():
     """Test handling of inactive orders snapshot"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(inactive_orders_snapshot_json)
+    await client.handle_message(inactive_orders_snapshot_json)
     inactive_orders = client.state.last_24h_inactive_orders
     assert len(inactive_orders) == 4, "expected 4 orders"
     order = inactive_orders.get("297bd6d8-ae68-4547-b414-0bfc87d13019")
@@ -141,12 +141,12 @@ async def test_handle_inactive_orders_snapshot():
 async def test_handle_order_created_and_then_close():
     """ Test handling of created order events"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(account_balances_json)
+    await client.handle_message(account_balances_json)
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8975.828764802")
     assert balance.locked == Decimal("0.4")
 
-    client.handle_message(order_created_json)
+    await client.handle_message(order_created_json)
     expected_order = client.state.open_orders_by_order_id.get("65ecb524-4a7f-4b22-aa44-ec0b38d3db9c")
     # Orders are handled through orders/trading channel
     assert expected_order is None
@@ -156,7 +156,7 @@ async def test_handle_order_created_and_then_close():
     assert balance.available == Decimal("8974.828764802")
     assert balance.locked == Decimal("1.4")
 
-    client.handle_message(order_closed_json)
+    await client.handle_message(order_closed_json)
 
     order = client.state.open_orders_by_order_id.get("65ecb524-4a7f-4b22-aa44-ec0b38d3db9c")
     assert order is None
@@ -173,19 +173,19 @@ async def test_handle_order_created_and_then_close():
 async def test_handle_trade_settled_updates():
     """Test trade settlement events"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(account_balances_json)
+    await client.handle_message(account_balances_json)
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8975.828764802")
     assert balance.locked == Decimal("0.4")
 
     # ------- Order created  ----------
-    client.handle_message(order_created_json)
+    await client.handle_message(order_created_json)
     expected_order = client.state.open_orders_by_order_id.get("65ecb524-4a7f-4b22-aa44-ec0b38d3db9c")
     # Orders are handled through orders/trading channel
     assert expected_order is None
 
     # On order channel update the order is in the store
-    client.handle_message(order_created_orders_channel_json)
+    await client.handle_message(order_created_orders_channel_json)
     expected_order = client.state.open_orders_by_order_id.get("65ecb524-4a7f-4b22-aa44-ec0b38d3db9c")
     assert expected_order is not None
     assert expected_order.remaining == Decimal("1.0")
@@ -198,7 +198,7 @@ async def test_handle_trade_settled_updates():
     assert balance.locked == Decimal("1.4")
 
     # ------- half of order settled  ----------
-    client.handle_message(trade_settled_partially_json)
+    await client.handle_message(trade_settled_partially_json)
     # check balance again, partially filled
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8974.828764802")
@@ -211,14 +211,14 @@ async def test_handle_trade_settled_updates():
     assert expected_order.price == "8500.0"
 
     # ------- fully settled  order ----------
-    client.handle_message(trade_settled_json)
+    await client.handle_message(trade_settled_json)
     # check balance again, not locked anymore
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8974.828764802")
     assert balance.locked == Decimal("0.4")
     # order is completed, on update from trading channel the store is updated
     client.apply_trading_buffer()
-    client.handle_message(trade_settled_order_done_json)
+    await client.handle_message(trade_settled_order_done_json)
 
     expected_order = client.state.open_orders_by_order_id.get("65ecb524-4a7f-4b22-aa44-ec0b38d3db9c")
     assert expected_order is None
@@ -233,19 +233,19 @@ async def test_handle_trade_settled_updates():
 async def test_handle_out_of_order_sequenced_message():
     """Test situations when an event arrives with an older sequence"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(account_balances_json)
+    await client.handle_message(account_balances_json)
 
-    client.handle_message(order_created_json)
+    await client.handle_message(order_created_json)
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8974.828764802")
     assert balance.locked == Decimal("1.4")
     # an event with older sequence should be ignored, therefore no change in the balance
-    client.handle_message(old_seq_order_created_json)
+    await client.handle_message(old_seq_order_created_json)
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8974.828764802")
     assert balance.locked == Decimal("1.4")
     # a newer event with higher sequence should be accepted
-    client.handle_message(newer_seq_order_created_json)
+    await client.handle_message(newer_seq_order_created_json)
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8569.228764802")
     assert balance.locked == Decimal("2.2")
@@ -254,7 +254,7 @@ async def test_handle_out_of_order_sequenced_message():
 async def test_deposit_of_funds():
     """Verify correct balance after deposit"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(account_balances_json)
+    await client.handle_message(account_balances_json)
 
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8975.828764802")
@@ -265,7 +265,7 @@ async def test_deposit_of_funds():
     assert balance.locked == Decimal("0.0")
 
     # Change in BTC balance after 1.1 BTC deposit
-    client.handle_message(account_balance_deposit)
+    await client.handle_message(account_balance_deposit)
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8976.938764802")
     assert balance.locked == Decimal("0.5")
@@ -279,7 +279,7 @@ async def test_deposit_of_funds():
 async def test_withdrawal_of_funds():
     """Verify correct balance after withdrawal"""
     client = AdvancedBitpandaProWebsocketClient("irrelevant", "irrelevant", log_messages)
-    client.handle_message(account_balances_json)
+    await client.handle_message(account_balances_json)
 
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8975.828764802")
@@ -290,7 +290,7 @@ async def test_withdrawal_of_funds():
     assert balance.locked == Decimal("0.0")
 
     # Change in BTC balance after 0.22 BTC withdrawal
-    client.handle_message(account_balance_withdrawal)
+    await client.handle_message(account_balance_withdrawal)
     balance = client.state.balances["BTC"]
     assert balance.available == Decimal("8975.608764802")
     assert balance.locked == Decimal("0.12")

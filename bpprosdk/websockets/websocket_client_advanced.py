@@ -33,10 +33,10 @@ class AdvancedBitpandaProWebsocketClient:
         self.trading_buffer = []
         self.initial_state_restore = False
 
-    def handle_message(self, json_message: json):
+    async def handle_message(self, json_message: json):
         """Handles received messages by passing them to the correct components"""
         LOG.debug(">>> %s", json_message)
-        self.callback(json_message)
+        await self.callback(json_message)
         if json_message["type"] == "HEARTBEAT":
             # Ignore heartbeat
             pass

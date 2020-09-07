@@ -74,7 +74,7 @@ class BitpandaProWebsocketClient:
             elif json_message["type"] == "ERROR":
                 LOG.error("!!! %s", json_message)
             # Forward all events
-            self.callback(json_message)
+            await self.callback(json_message)
 
     def get_auth_message_as_json(self):
         """Creates a valid authenticate message with the provided api key"""

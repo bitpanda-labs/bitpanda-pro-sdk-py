@@ -21,7 +21,7 @@ async def test_emit_heartbeat_on_idle_connection(event_loop):
     """
     future_result = event_loop.create_future()
 
-    def handle_message(json_message):
+    async def handle_message(json_message):
         LOG.info("emitted event %s", json_message)
         assert json_message["subscription"] == "SYSTEM"
         assert json_message["channel_name"] == "SYSTEM"
