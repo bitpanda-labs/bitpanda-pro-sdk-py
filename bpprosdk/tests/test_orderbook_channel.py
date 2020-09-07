@@ -20,7 +20,7 @@ async def test_verify_successful_order_book_subscription(event_loop):
     future_subscribe = event_loop.create_future()
     future_unsubscribe = event_loop.create_future()
 
-    def handle_message(json_message):
+    async def handle_message(json_message):
         LOG.debug("emitted event %s", json_message)
         if json_message["type"] == "SUBSCRIPTIONS":
             LOG.debug("Subscribed to order book channel")
@@ -43,14 +43,14 @@ async def test_verify_successful_order_book_subscription(event_loop):
 async def test_verify_handling_of_order_books():
     """test that the client handles order book messages correctly"""
 
-    def log_messages(json_message):
+    async def log_messages(json_message):
         """Callback only logging messages"""
         LOG.debug("message: %s", json_message)
 
     client = AdvancedBitpandaProWebsocketClient(None, 'test', log_messages)
     subscription = '{"channels":[{"instrument_codes":["BTC_EUR","ETH_EUR"],"depth":200,"name":"ORDER_BOOK"}],' \
                    '"type":"SUBSCRIPTIONS","time":"2020-07-15T12:00:00.364Z"}'
-    client.handle_message(json.loads(subscription))
+    await client.handle_message(json.loads(subscription))
     empty_oder_book_btc_eur = client.get_order_book('BTC_EUR')
     assert bool(empty_oder_book_btc_eur.get_asks()) is False, "expected empty order book for btc_eur"
     assert bool(empty_oder_book_btc_eur.get_bids()) is False, "expected empty order book for btc_eur"
@@ -64,17 +64,17 @@ async def test_verify_handling_of_order_books():
                            '"1.11066"],["8885.99","2.27369"],["8886.0","0.08116"],["8887.0","0.30046"],["8888.0",' \
                            '"0.44740"],["8890.0","0.993"],["8896.42","0.42775"]],"channel_name":"ORDER_BOOK",' \
                            '"type":"ORDER_BOOK_SNAPSHOT","time":"2020-07-15T12:00:00.365Z"}'
-    client.handle_message(json.loads(raw_snapshot_btc_eur))
+    await client.handle_message(json.loads(raw_snapshot_btc_eur))
     oder_book_btc_eur = client.get_order_book('BTC_EUR')
     assert bool(oder_book_btc_eur.get_asks()) is True, "expected asks for btc_eur"
     assert bool(oder_book_btc_eur.get_bids()) is True, "expected bids for btc_eur"
     raw_snapshot_eth_eur = '{"instrument_code":"ETH_EUR","bids":[["186.3","20.4"]],' \
                            '"asks":[["186.58","0.36287"]],"channel_name":"ORDER_BOOK",' \
                            '"type":"ORDER_BOOK_SNAPSHOT","time":"2020-07-15T12:00:00.366Z"}'
-    client.handle_message(json.loads(raw_snapshot_eth_eur))
+    await client.handle_message(json.loads(raw_snapshot_eth_eur))
     oder_book_eth_eur = client.get_order_book('ETH_EUR')
     assert bool(oder_book_eth_eur.get_asks()) is True, "expected asks for eth_eur"
     assert bool(oder_book_eth_eur.get_bids()) is True, "expected bids for eth_eur"
     unsubscribed = '{"channel_name":"ORDER_BOOK","type":"UNSUBSCRIBED","time":"2020-07-15T12:30:00.288Z"}'
-    client.handle_message(json.loads(unsubscribed))
+    await client.handle_message(json.loads(unsubscribed))
     assert bool(client.get_order_books()) is False

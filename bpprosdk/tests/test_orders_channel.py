@@ -93,9 +93,10 @@ def test_verify_client_id():
     assert str(my_client_id) == stop_order["order"]["client_id"]
 
 
-def test_message_handling_of_orders_channel_by_using_order_id():
+@pytest.mark.asyncio
+async def test_message_handling_of_orders_channel_by_using_order_id():
     """Tests handling of messages of the orders channel"""
-    def handle_message(json_message):
+    async def handle_message(json_message):
         LOG.debug("ignored message %s", json_message)
 
     client = AdvancedBitpandaProWebsocketClient(None, 'test', handle_message)
@@ -105,20 +106,21 @@ def test_message_handling_of_orders_channel_by_using_order_id():
                      '"time":"2020-06-02T06:48:08.278Z","side":"BUY","price":"6000.0","amount":"1.0",' \
                      '"filled_amount":"0.0","type":"LIMIT"},"channel_name":"ORDERS","type":"ORDER_CREATED",' \
                      '"time":"2020-06-02T06:48:08.278Z"} '
-    client.handle_message(json.loads(order_creation))
+    await client.handle_message(json.loads(order_creation))
     assert len(client.state.open_orders_by_client_id) == 0
     assert len(client.state.open_orders_by_order_id) == 1
     order_cancellation = '{"order_id":"c241b172-ee8d-4e1b-8900-6512c2c23579","channel_name":"ORDERS",' \
                          '"type":"ORDER_SUBMITTED_FOR_CANCELLATION","time":"2020-06-02T06:48:08.381Z"} '
-    client.handle_message(json.loads(order_cancellation))
+    await client.handle_message(json.loads(order_cancellation))
     assert len(client.state.open_orders_by_client_id) == 0
     # Open order is removed from store on trading channel update
     assert len(client.state.open_orders_by_order_id) == 1
 
 
-def test_message_handling_of_orders_channel_by_using_client_id():
+@pytest.mark.asyncio
+async def test_message_handling_of_orders_channel_by_using_client_id():
     """Tests handling of messages of the orders channel"""
-    def handle_message(json_message):
+    async def handle_message(json_message):
         LOG.debug("ignored message %s", json_message)
 
     client = AdvancedBitpandaProWebsocketClient(None, 'test', handle_message)
@@ -129,12 +131,12 @@ def test_message_handling_of_orders_channel_by_using_client_id():
                      '"time":"2020-06-02T06:48:08.278Z","side":"BUY","price":"6000.0","amount":"1.0",' \
                      '"filled_amount":"0.0","type":"LIMIT"},"channel_name":"ORDERS","type":"ORDER_CREATED",' \
                      '"time":"2020-06-02T06:48:08.278Z"} '
-    client.handle_message(json.loads(order_creation))
+    await client.handle_message(json.loads(order_creation))
     assert len(client.state.open_orders_by_client_id) == 1
     assert len(client.state.open_orders_by_order_id) == 1
     order_cancellation = '{"client_id":"cd62ef52-048f-4395-b66f-1af28625f393","channel_name":"ORDERS",' \
                          '"type":"ORDER_SUBMITTED_FOR_CANCELLATION","time":"2020-06-02T06:48:08.381Z"} '
-    client.handle_message(json.loads(order_cancellation))
+    await client.handle_message(json.loads(order_cancellation))
     # Open order is removed from store on trading channel update
     assert len(client.state.open_orders_by_client_id) == 1
     assert len(client.state.open_orders_by_order_id) == 1
@@ -150,7 +152,7 @@ async def test_verify_successful_orders_channel_subscription(event_loop):
     when_order_cancelled = event_loop.create_future()
     when_unsubscribed = event_loop.create_future()
 
-    def handle_message(json_message):
+    async def handle_message(json_message):
         if json_message["type"] == "SUBSCRIPTIONS":
             when_subscribed.set_result("subscribed")
         elif json_message["type"] == "UNSUBSCRIBED":
@@ -172,5 +174,5 @@ async def test_verify_successful_orders_channel_subscription(event_loop):
     await client.cancel_order(CancelOrderByClientId(my_client_id))
     LOG.info(await when_order_cancelled)
     await client.unsubscribe(Unsubscription([ChannelName.orders.value]))
-    # LOG.info(await when_unsubscribed)
+    LOG.info(await when_unsubscribed)
     await client.close()

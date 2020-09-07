@@ -12,7 +12,7 @@ async def main():
     when_order_created = asyncio.get_event_loop().create_future()
     when_order_cancelled = asyncio.get_event_loop().create_future()
 
-    def handle_message(event: json):
+    async def handle_message(event: json):
         LOG.info("%s", event)
         if event["type"] == "ORDER_CREATED":
             when_order_created.set_result("created...")
