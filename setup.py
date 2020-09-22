@@ -16,7 +16,7 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name='bitpanda-pro-sdk',
-    version='0.7.0',
+    version='0.7.1',
     description='Bitpanda Pro Python SDK',
 
     long_description='Python reference implementation to easily interact with the web socket api from Bitpanda Pro',

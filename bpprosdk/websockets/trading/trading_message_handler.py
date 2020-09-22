@@ -27,7 +27,8 @@ class TradingMessageHandler:
             self.state.fill_open_order(fill)
         elif json_message["type"] == "DONE":
             done = Done.from_json(message)
-            self.state.order_done(done)
+            if done.status == "CANCELLED" or done.status == "FILLED_FULLY":
+                self.state.order_done(done)
         elif json_message["type"] == "TRACKED":
             tracked = Tracked.from_json(message)
             LOG.debug("Stop Order tracked: %s", tracked)
