@@ -77,6 +77,44 @@ async def test_message_handling_of_stop_order_events():
     assert len(client.state.open_orders_by_order_id) == 1
 
 
+async def test_handling_of_done_error_events():
+    """Tests handling of error messages where type is DONE"""
+    async def handle_message(json_message):
+        LOG.debug("ignored message %s", json_message)
+
+    client = AdvancedBitpandaProWebsocketClient(None, 'test', handle_message)
+    client.apply_trading_buffer()
+    # Matching order would have caused a self trade => so it is never booked
+    self_trade_prevented = '{"status": "SELF_TRADE", "instrument_code": "ETH_EUR", "order_id": ' \
+                           '"338b7543-95d3-4cb8-a264-ed4212da7d92", "client_id": ' \
+                           '"58672b66-fc1b-4855-add7-5365297a7213", "remaining": "60.6767", "channel_name": ' \
+                           '"TRADING", "type": "DONE", "time": "2020-09-15T12:57:39.737Z"} '
+    await client.handle_message(json.loads(self_trade_prevented))
+    assert len(client.state.open_orders_by_order_id) == 0
+
+    # Only for market orders => when not enough funds have been locked the order fails
+    insufficient_funds = '{"status": "INSUFFICIENT_FUNDS","instrument_code": "ETH_EUR","order_id": ' \
+                         '"fb2d540e-6fe4-411c-8d91-7c94b94d1ae2","remaining": "1.0","channel_name": "TRADING",' \
+                         '"type": "DONE","time": "2020-09-15T13:15:07.214Z"}'
+    await client.handle_message(json.loads(insufficient_funds))
+    assert len(client.state.open_orders_by_order_id) == 0
+
+    # Only for market orders => when not enough liquidity is in the order book the market order fails
+    insufficient_liquidity = '{"status": "INSUFFICIENT_LIQUIDITY","instrument_code": "ETH_EUR","order_id": ' \
+                             '"80cf3fed-5766-4b5c-a378-213c5541bf5d","remaining": "80.0","channel_name": "TRADING",' \
+                             '"type": "DONE","time": "2020-09-15T12:58:12.305Z"}'
+    await client.handle_message(json.loads(insufficient_liquidity))
+    assert len(client.state.open_orders_by_order_id) == 0
+
+    # Internal system error => order was never booked
+    time_to_market_exceeded = '{"status": "TIME_TO_MARKET_EXCEEDED","instrument_code": "ETH_EUR","order_id": ' \
+                              '"bbf4780c-c26b-45dd-a17d-4d554a5b6e30","remaining": "34.0","channel_name": "TRADING",' \
+                              '"type": "DONE","time": "2020-09-15T12:58:12.305Z"}'
+    await client.handle_message(json.loads(time_to_market_exceeded))
+    assert len(client.state.open_orders_by_order_id) == 0
+
+
+@pytest.mark.asyncio
 async def test_verify_successful_trading_subscription(event_loop):
     """Handle authenticate messages"""
     api_token = os.environ['BP_PRO_API_TOKEN']

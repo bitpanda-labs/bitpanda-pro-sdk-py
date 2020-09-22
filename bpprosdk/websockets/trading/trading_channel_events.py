@@ -46,10 +46,10 @@ class Done:
     order_id: uuid
     remaining: Decimal
     """
-    FILL, FILLED_FULLY, CANCELLED, SELF_TRADE
+    CANCELLED, FILLED_FULLY, SELF_TRADE, INSUFFICIENT_FUNDS, INSUFFICIENT_LIQUIDITY, TIME_TO_MARKET_EXCEEDED
     """
     status: str
-    order_book_sequence: int
+    order_book_sequence: Optional[int] = 0
     client_id: Optional[str] = None
 
 
