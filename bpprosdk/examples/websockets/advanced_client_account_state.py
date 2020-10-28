@@ -2,6 +2,7 @@ import asyncio
 import json
 import logging
 import uuid
+from decimal import Decimal
 
 from bpprosdk.websockets.orders.cancel_order import CancelOrderByClientId
 from bpprosdk.websockets.orders.create_order import CreateOrder, LimitOrder, Side
@@ -32,7 +33,7 @@ async def main():
     await bp_client.start_with(None, True)
 
     client_id = str(uuid.uuid4())
-    new_order_with_client_id = CreateOrder(LimitOrder("BTC_EUR", Side.buy, 0.01, 1000.50, client_id))
+    new_order_with_client_id = CreateOrder(LimitOrder("BTC_EUR", Side.buy, Decimal('0.01'), Decimal('1000.50'), client_id))
     LOG.info("Creating new Order with client_id: %s", new_order_with_client_id)
     await bp_client.create_order(new_order_with_client_id)
     await when_order_created

@@ -1,5 +1,6 @@
 """Websocket tests"""
 # pylint: disable=no-member
+# pylint: disable=line-too-long
 import json
 import logging
 import os
@@ -19,7 +20,7 @@ LOG = logging.getLogger(__name__)
 
 def test_verify_limit_order_payload():
     """Verify limit order structure"""
-    raw = CreateOrder(LimitOrder("BTC_EUR", Side.buy, 1.2, 5000.50))
+    raw = CreateOrder(LimitOrder("BTC_EUR", Side.buy, Decimal('1.2'), Decimal('5000.50')))
     as_json_string = raw.to_json()
     LOG.debug("limit_order: %s", as_json_string)
     limit_order = json.loads(as_json_string)
@@ -29,13 +30,13 @@ def test_verify_limit_order_payload():
     assert result["instrument_code"] == "BTC_EUR"
     assert result["type"] == "LIMIT"
     assert result["side"] == "BUY"
-    assert Decimal(result["amount"]) == Decimal(1.2)
-    assert Decimal(result["price"]) == Decimal(5000.50)
+    assert Decimal(result["amount"]) == Decimal('1.2')
+    assert Decimal(result["price"]) == Decimal('5000.50')
 
 
 def test_verify_limit_order_supports_time_in_force():
     """Verify limit order with time_in_force structure"""
-    raw = CreateOrder(LimitOrder("BTC_EUR", Side.sell, 0.12, 123.0, None, TimeInForce.fill_or_kill))
+    raw = CreateOrder(LimitOrder("BTC_EUR", Side.sell, Decimal('0.12'), Decimal('123.0'), None, TimeInForce.fill_or_kill))
     as_json_string = raw.to_json()
     LOG.debug("limit_order: %s", as_json_string)
     limit_order = json.loads(as_json_string)
@@ -45,13 +46,13 @@ def test_verify_limit_order_supports_time_in_force():
     assert result["instrument_code"] == "BTC_EUR"
     assert result["type"] == "LIMIT"
     assert result["side"] == "SELL"
-    assert Decimal(result["amount"]) == Decimal(0.12)
-    assert Decimal(result["price"]) == Decimal(123.0)
+    assert Decimal(result["amount"]) == Decimal('0.12')
+    assert Decimal(result["price"]) == Decimal('123.0')
 
 
 def test_verify_market_order_payload():
     """Verify market order structure"""
-    raw = CreateOrder(MarketOrder("BTC_EUR", Side.sell, 0.05))
+    raw = CreateOrder(MarketOrder("BTC_EUR", Side.sell, Decimal('0.05')))
     as_json_string = raw.to_json()
     LOG.debug("market_order: %s", as_json_string)
     market_order = json.loads(as_json_string)
@@ -60,12 +61,12 @@ def test_verify_market_order_payload():
     assert result["instrument_code"] == "BTC_EUR"
     assert result["type"] == "MARKET"
     assert result["side"] == "SELL"
-    assert Decimal(result["amount"]) == Decimal(0.05)
+    assert Decimal(result["amount"]) == Decimal('0.05')
 
 
 def test_verify_stop_order_payload():
     """Verify stop order structure"""
-    raw = CreateOrder(StopOrder("BTC_EUR", Side.sell, 1.23, 5000.50, 5001))
+    raw = CreateOrder(StopOrder("BTC_EUR", Side.sell, Decimal('1.23'), Decimal('5000.50'), Decimal('5001')))
     as_json_string = raw.to_json()
     LOG.debug("stop_order: %s", as_json_string)
     stop_order = json.loads(as_json_string)
@@ -74,20 +75,20 @@ def test_verify_stop_order_payload():
     assert result["instrument_code"] == "BTC_EUR"
     assert result["type"] == "STOP"
     assert result["side"] == "SELL"
-    assert Decimal(result["amount"]) == Decimal(1.23)
-    assert Decimal(result["price"]) == Decimal(5000.50)
-    assert Decimal(result["trigger_price"]) == Decimal(5001)
+    assert Decimal(result["amount"]) == Decimal('1.23')
+    assert Decimal(result["price"]) == Decimal('5000.50')
+    assert Decimal(result["trigger_price"]) == Decimal('5001')
 
 
 def test_verify_client_id():
     """Verify that client_id is accepted"""
     my_client_id = str(uuid.uuid4())
-    as_json_string = CreateOrder(LimitOrder("BTC_EUR", Side.buy, 1.2, 5000.50, my_client_id)).to_json()
+    as_json_string = CreateOrder(LimitOrder("BTC_EUR", Side.buy, Decimal('1.2'), Decimal('5000.50'), my_client_id)).to_json()
     LOG.debug("order: %s", as_json_string)
     limit_order = json.loads(as_json_string)
     assert str(my_client_id) == limit_order["order"]["client_id"]
 
-    as_json_string = CreateOrder(StopOrder("BTC_EUR", Side.buy, 1.2, 5000.50, 5000, my_client_id)).to_json()
+    as_json_string = CreateOrder(StopOrder("BTC_EUR", Side.buy, Decimal('1.2'), Decimal('5000.50'), Decimal('5000'), my_client_id)).to_json()
     LOG.debug("order: %s", as_json_string)
     stop_order = json.loads(as_json_string)
     assert str(my_client_id) == stop_order["order"]["client_id"]
@@ -169,7 +170,7 @@ async def test_verify_successful_orders_channel_subscription(event_loop):
     await client.start(Subscriptions([subscription]))
     LOG.info(await when_subscribed)
     my_client_id = uuid.uuid4()
-    await client.create_order(CreateOrder(LimitOrder("BTC_EUR", Side.buy, 0.01, 5000.50, str(my_client_id))))
+    await client.create_order(CreateOrder(LimitOrder("BTC_EUR", Side.buy, Decimal('0.01'), Decimal('5000.50'), str(my_client_id))))
     LOG.info(await when_order_created)
     await client.cancel_order(CancelOrderByClientId(my_client_id))
     LOG.info(await when_order_cancelled)
